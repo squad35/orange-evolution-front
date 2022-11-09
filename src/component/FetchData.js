@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -30,7 +30,7 @@ function FetchData() {
                 {users.map((user) =>
                 <Box display='flex' justifyContent='center' >
                     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                        <ListItem sx={{ p: 2, background:'#0a5483', border: '1px solid #0a5483', borderRadius: '16px', boxShadow:2, color: 'white'}}>
+                        <ListItem sx={{ p: 2, background:'#0a5483', border: '1px solid #0a5483', borderRadius: '16px', boxShadow:2}}>
                         <ListItemAvatar>
                             <Avatar>
                             <PersonIcon />

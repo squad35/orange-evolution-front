@@ -4,6 +4,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import FetchData from './component/FetchData';
+import Login from './component/Login';
 
 
 
@@ -12,7 +13,7 @@ class App extends Component {
 
     return (
       <Box>
-        <Grid container display='flex'justifyContent='center' spacing={2} mt={5}>
+        {/* <Grid container display='flex'justifyContent='center' spacing={2} mt={5}>
           <Grid item display='flex' justifyContent='center' xs={12} px={3}>
         
               <Button>Save</Button>
@@ -30,10 +31,11 @@ class App extends Component {
           </Grid>
         </Grid>
         
-        <FetchData />
+        <FetchData /> */}
+        <Login />
   
       </Box> 
-  );
+  )
   }
         
 }
