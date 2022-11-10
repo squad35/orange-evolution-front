@@ -5,12 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { SquadTheme } from './Squad';
 import { ThemeProvider } from '@mui/material';
+import Login from './component/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={SquadTheme}>
-      <App/>
+      <Login/>
     </ThemeProvider>
   </React.StrictMode>
 );
