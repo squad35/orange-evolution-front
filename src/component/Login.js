@@ -29,13 +29,13 @@ function Login() {
     
     return(
         <div className='Login'>
-        <Box width="100vw" height="100vh" color='#ffffff' display='flex' justifyContent='center' alignItems='center'>
+        <Box width="100vw" height="100vh" display='flex' justifyContent='center' alignItems='center'>
           <Box maxWidth='400px'  display='flex' flexDirection='column' justifyContent="center" gap={0.5}>
             <Box display="flex" justifyContent="center" mb={2} >
               <img src={Logo} alt="logotipo Orange Juice" width="144px" />
             </Box>
             <Hidden mdDown>
-              <Typography breakpo variant='h5' fontWeight={700} textAlign="center" >Evolua sua carreira</Typography>
+              <Typography variant='h5' fontWeight={700} textAlign="center" >Evolua sua carreira</Typography>
             </Hidden>
 
             <Typography variant='h5' fontWeight={700} mt={4}>Login</Typography>

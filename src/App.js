@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import FetchData from './component/FetchData';
 import Login from './component/Login';
+import Header from './component/Header';
 
 
 
@@ -32,6 +29,7 @@ class App extends Component {
         </Grid>
         
         <FetchData /> */}
+        <Header />
         <Login />
   
       </Box> 
