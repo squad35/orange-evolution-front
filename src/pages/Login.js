@@ -62,7 +62,7 @@ function Login() {
               <Typography 
                   color="#ffffff" variant='subtitle2' fontWeight={400} pt={1}>Senha
                 </Typography>
-                </InputLabel>
+            </InputLabel>
             <FormControl color='secondary' focused>
               <OutlinedInput
                 color="primary"
