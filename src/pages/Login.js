@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, TextField, Typography, InputLabel, OutlinedInput, IconButton, Button, FormControl, Grid, Hidden} from '@mui/material';
 import {Visibility, VisibilityOff, Lock, Mail, ArrowRight} from '@mui/icons-material';
 import InputAdornment from '@mui/material/InputAdornment';
-import Logo from "../logo.svg"
+import Logo from "../img/logo.svg"
 
 function Login() {
 

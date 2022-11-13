@@ -11,8 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Logo from "../logo.svg"
-import { textAlign } from '@mui/system';
+import Logo from "../img/logo.svg"
 
 const pages = ['Home', 'Trilhas', 'Parceiros', 'Newsletter', 'Login'];
 const settings = ['Perfil', 'Aprendizado', 'Configurações', 'Sair'];
@@ -55,7 +54,8 @@ function Header() {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            <Menu 
+            p={0} m={0}         
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -70,11 +70,11 @@ function Header() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' }
+                display: { xs: 'block', md: 'none' }, width: '100vw'
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{width: '100vw'}}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} p={0} m={0} sx={{minWidth: '100vw'}}>
                   <Typography textAlign="start" variant='h5' fontWeight={700}>{page}</Typography>
                 </MenuItem>
               ))}

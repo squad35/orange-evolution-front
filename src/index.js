@@ -4,14 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { SquadTheme } from './Squad';
-import { ThemeProvider } from '@mui/material';
-import Login from './component/Login';
-import Header from './component/Header';
+import {ThemeProvider } from '@mui/material';
+import Login from './pages/Login';
+import Header from './components/Header';
+import AddContent from './pages/AddContent'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={SquadTheme}>
+    <ThemeProvider theme={SquadTheme}>      
       <App/>
     </ThemeProvider>
   </React.StrictMode>
