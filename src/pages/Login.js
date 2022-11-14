@@ -133,19 +133,6 @@ function Login() {
             </FormControl>
               <Typography fontWeight={500} mb={2}>Esqueceu a senha</Typography>
               <Button onClick={handleSubmit} variant='outlined' size='large'><Typography fontWeight={500} color="#ffffff" textTransform="none">Entrar</Typography></Button>
-              <Typography fontWeight={500} my={2} textAlign="center">Ou entre com</Typography>
-              <Grid container spacing={2}>
-                  <Grid item sm={6}>
-                    <Button fullwidht size="large" variant='outlined' sx={{color:"#D95946", border: "1px solid #D95946"}} startIcon={<Mail />}>
-                      <Typography fontWeight={700} px={1} textTransform="none">Google</Typography>
-                    </Button>
-                  </Grid> 
-                  <Grid item sm={6}>
-                    <Button fullwidht variant='outlined' size="large" sx={{color:"#2196F3", border: "1px solid #2196F3"}} startIcon={<Mail />}>
-                      <Typography fontWeight={700} px={1} textTransform="none">Outlook</Typography>
-                    </Button>
-                  </Grid>
-              </Grid>
               <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
 
                 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { ArrowBack, ConfirmationNumberRounded } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
 import {
     Box,
     Grid,
@@ -18,7 +17,6 @@ import fetchService from '../services/fetchService';
 import ContentCard from '../components/ContentCard';
 
 function AddContent() {
-    //const parceiros =['Alura', 'Cubos Academy', 'Curso em Vídeo', 'Udemy']
     const [contentType, setContentType] = useState([]);
     const [contentTypeId, setContetTypeId] = useState('');
     const [contentName, setContentName] = useState('');
@@ -112,31 +110,20 @@ function AddContent() {
 
                 {!created && (
                     <>
-                        <Typography mt={2}>Adição de conteúdo:</Typography>
+                        <Typography my={2}>Adição de conteúdo:</Typography>
                         <Grid
                             container
                             width="100vw"
                             maxWidth="100%"
-                            spacing={2}
                             display="flex"
-                            alignItems="center"
+                            alignItems="start"
+                            columnSpacing={4}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} md={1}>
                                 <Typography>Tipo</Typography>
                             </Grid>
-                            <Grid item xs={9}>
-                                {/* <FormControl color='primary' focused fullWidth>
-                                          <Autocomplete
-                                          disablePortal
-                                          focused                
-                                          options={contentType}
-                                          value={contentTypeId}
-                                          onChange={(e) => setContentType(e.target.value)}
-                                          fullWidth
-                                          renderInput={(params) => <TextField focused {...params}/>}
-                                      />
-                                    </FormControl> */}
-                                <FormControl color="primary" focused fullWidth>
+                            <Grid item xs={12} md={5} mb={2}>
+                                <FormControl color="primary" focused fullWidth size='small'>
                                     <Select
                                         className="select"
                                         value={contentTypeId}
@@ -148,14 +135,15 @@ function AddContent() {
                                             </MenuItem>
                                         ))}
                                     </Select>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <Typography>Nome</Typography>
-                            </Grid>
-                            <Grid item xs={9}>
+                                </FormControl>   
+                            </Grid>             
+                            <Grid item xs={12} md={1}>
+                                <Typography>Nome</Typography>                            
+                            </Grid>            
+                            <Grid item xs={12} md={5} mb={2}>
                                 <FormControl color="primary" focused fullWidth>
                                     <TextField
+                                        size='small'
                                         focused
                                         fullWidth
                                         type="text"
@@ -165,20 +153,11 @@ function AddContent() {
                                     ></TextField>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={3}>
-                                <Typography>Parceiros</Typography>
+                            <Grid item xs={12} md={1}>
+                                <Typography>Parceiro</Typography>
                             </Grid>
-                            <Grid item xs={9}>
-                                {/* <FormControl color='primary' focused fullWidth>
-                                          <Autocomplete
-                                          disablePortal
-                                          focused                
-                                          options={parceiros}
-                                          fullWidth
-                                          renderInput={(params) => <TextField focused {...params} />}
-                                      />
-                                    </FormControl> */}
-                                <FormControl color="primary" focused fullWidth>
+                            <Grid item xs={12} md={5} mb={2}>
+                                <FormControl color="primary" focused fullWidth size='small'>
                                     <Select
                                         className="select"
                                         value={authorId}
@@ -192,12 +171,14 @@ function AddContent() {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={3}>
+
+                            <Grid item xs={12} md={1}>
                                 <Typography>Duração</Typography>
-                            </Grid>
-                            <Grid item xs={9}>
-                                <FormControl color="primary" focused fullWidth>
+                            </Grid>                
+                            <Grid item xs={12} md={5} mb={2}>
+                                <FormControl color="primary" focused fullWidth >
                                     <TextField
+                                        size='small'
                                         focused
                                         fullWidth
                                         type="text"
@@ -207,12 +188,14 @@ function AddContent() {
                                     ></TextField>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={3}>
+                            
+                            <Grid item xs={12} md={1}>
                                 <Typography>Tags</Typography>
                             </Grid>
-                            <Grid item xs={9}>
-                                <FormControl color="primary" focused fullWidth>
+                            <Grid item xs={12} md={5} mb={2}>
+                                <FormControl color="primary" focused fullWidth >
                                     <TextField
+                                        size='small'
                                         focused
                                         fullWidth
                                         type="text"
@@ -222,12 +205,14 @@ function AddContent() {
                                     ></TextField>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={3}>
+                            
+                            <Grid item xs={12} md={1}>
                                 <Typography>Imagem</Typography>
                             </Grid>
-                            <Grid item xs={9}>
+                            <Grid item xs={12} md={5} mb={2}>
                                 <FormControl color="primary" focused fullWidth>
                                     <TextField
+                                        size='small'
                                         focused
                                         fullWidth
                                         type="text"
@@ -237,12 +222,14 @@ function AddContent() {
                                     ></TextField>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={3}>
+                            
+                            <Grid item xs={12} md={1}>
                                 <Typography>Link</Typography>
                             </Grid>
-                            <Grid item xs={9}>
-                                <FormControl color="primary" focused fullWidth>
+                            <Grid item xs={12} md={5} mb={2}>
+                                <FormControl color="primary" fullWidth >
                                     <TextField
+                                        size='small'
                                         focused
                                         fullWidth
                                         type="url"
@@ -252,22 +239,26 @@ function AddContent() {
                                     ></TextField>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={3}>
+                            
+                            <Grid item xs={12} md={1}>
                                 <Typography>Descrição</Typography>
                             </Grid>
-                            <Grid item xs={9}>
-                                <FormControl color="primary" focused fullWidth>
+                            <Grid item xs={12} md={5} mb={5}>
+                                <FormControl focused fullWidth >
                                     <TextareaAutosize
-                                        minRows={3}
                                         focused
+                                        minRows={5}
+                                        style={{ background: "none", border: "1px solid #ffffff" }}
                                         id="descContent"
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
+
                                 </FormControl>
+                                    
                             </Grid>
                             <Grid item xs={12}>
-                                <Button onClick={handleSubmit}>Adicionar</Button>
+                                <Button variant="contained" color='inherit' fullWidth onClick={handleSubmit}><Typography color="#000000" textTransform="none">Adicionar</Typography></Button>
                             </Grid>
                         </Grid>
                     </>
