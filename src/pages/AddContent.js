@@ -101,7 +101,7 @@ function AddContent() {
     return (
         <div>
             <Header />
-            <Box mt={10} ms={2} px={5} display="flex" flexDirection="column">
+            <Box mt={10} ms={2} px={{sm:10, xs:5}} display="flex" flexDirection="column">
                 <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                     <IconButton size="large" color="inherit">
                         <ArrowBack />
@@ -113,11 +113,11 @@ function AddContent() {
                         <Typography my={2}>Adição de conteúdo:</Typography>
                         <Grid
                             container
-                            width="100vw"
-                            maxWidth="100%"
+                            width="100%"
+                            maxWidth="xl"
                             display="flex"
                             alignItems="start"
-                            columnSpacing={4}
+                            columnSpacing={{ md: 5 }}
                         >
                             <Grid item xs={12} md={1}>
                                 <Typography>Tipo</Typography>
@@ -140,7 +140,7 @@ function AddContent() {
                             <Grid item xs={12} md={1}>
                                 <Typography>Nome</Typography>                            
                             </Grid>            
-                            <Grid item xs={12} md={5} mb={2}>
+                            <Grid item xs={12} md={5} mb={2} >
                                 <FormControl color="primary" focused fullWidth>
                                     <TextField
                                         size='small'
@@ -254,10 +254,10 @@ function AddContent() {
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
 
-                                </FormControl>
-                                    
+                                </FormControl>                                    
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item md={7}></Grid>
+                            <Grid item xs={12} md={5}>
                                 <Button variant="contained" color='inherit' fullWidth onClick={handleSubmit}><Typography color="#000000" textTransform="none">Adicionar</Typography></Button>
                             </Grid>
                         </Grid>

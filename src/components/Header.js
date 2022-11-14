@@ -1,16 +1,19 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import{
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
 import Logo from "../img/logo.svg"
 
 const pages = ['Home', 'Trilhas', 'Parceiros', 'Newsletter', 'Login'];
@@ -38,12 +41,12 @@ function Header() {
 
   return (
     <AppBar position="fixed" color="secondary">
-      <Container maxWidth="xl">
+      <Container maxWidth="100vw" >
         <Toolbar>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <img src={Logo} alt="logotipo Orange Juice" width="54px" />          
         </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -75,11 +78,20 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu} p={0} m={0} sx={{minWidth: '100vw'}}>
-                  <Typography textAlign="start" variant='h5' fontWeight={700}>{page}</Typography>
+                  <Typography textAlign="start" variant='h6' fontWeight={700}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >             
+                <SearchIcon/>
+              </IconButton>
+            </Box>
           
           <Box sx={{ display: { xs: 'flex', md: 'none' }, flexGrow:1, justifyContent:'center'}} >
             <img src={Logo} alt="logotipo Orange Juice" width="32px" />
@@ -96,6 +108,7 @@ function Header() {
               </Button>
             ))}
           </Box>
+
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -121,7 +134,7 @@ function Header() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu} >
-                  <Typography display="flex" flex-end variant='h5' fontWeight={700}>{setting}</Typography>
+                  <Typography display="flex" flex-end variant='h6' fontWeight={700}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

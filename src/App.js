@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Header from './components/Header';
 import AddContent from './pages/AddContent'
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import SearchContent from './pages/SearchContent';
 
 
 
@@ -18,6 +18,7 @@ class App extends Component {
           <Route path="/addcontent" element={<AddContent/>}/>
           <Route path="/" element={<Home/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/search" element={<SearchContent/>}/>
         </Routes>
 
       </Router>

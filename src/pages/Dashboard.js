@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Header from "../components/Header";
 
 
@@ -13,15 +13,14 @@ function Dashboard() {
                     <Typography variant="h6" fontWeight={700}>Olá, Admin.</Typography>
                     <Typography>Seja Bem vindo</Typography>
                 </Box>
-                <Box>
+                <Box maxWidth={400}>
                     <Typography py={2}>Atividades</Typography>
                     <Box >
-                        <Button variant="contained" color='inherit' fullWidth p={3}><Typography color="#000000" textTransform="none">Adicionar Conteúdo</Typography></Button>                     
+                        <Button variant="contained" color='inherit' fullWidth size="large" p={3}><Typography color="#000000" textTransform="none">Adicionar Conteúdo</Typography></Button>                     
 
                     </Box>
                     <Box py={4}>                    
-                        <Button variant="contained" color='inherit' fullWidth ><Typography color="#000000" textTransform="none">Arquivar Conteúdo</Typography></Button>
-
+                        <Button variant="contained" color='inherit' fullWidth size="large" ><Typography color="#000000" textTransform="none">Arquivar Conteúdo</Typography></Button>
                     </Box>
                 </Box>
             </Box>  
