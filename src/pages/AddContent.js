@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import fetchService from '../services/fetchService';
 import ContentCard from '../components/ContentCard';
+import { Navigate } from 'react-router-dom';
 
 function AddContent() {
     const [contentType, setContentType] = useState([]);
@@ -27,8 +28,8 @@ function AddContent() {
     const [image, setImage] = useState('');
     const [contentLink, setContentLink] = useState('');
     const [description, setDescription] = useState('');
-    const [dataReturned, setDataReturned] = useState('');
     const [created, setCreated] = useState(false);
+    const [logged, setLogged] = useState(localStorage.getItem('logged'));
 
     const FetchContentType = async (url) => {
         const response = await fetchService(url, 'GET');
@@ -57,7 +58,6 @@ function AddContent() {
 
             if (response.status === 201) {
                 alert('cadastrado com sucesso!');
-                setDataReturned(data[0]);
                 setCreated(true);
             } else {
                 alert(data.message);
@@ -100,181 +100,204 @@ function AddContent() {
 
     return (
         <div>
-            <Header />
-            <Box mt={10} ms={2} px={{sm:10, xs:5}} display="flex" flexDirection="column">
-                <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                    <IconButton size="large" color="inherit">
-                        <ArrowBack />
-                    </IconButton>
-                </Box>
+            {logged === 'true' && (
+                <>
+                    <Header setLogged={setLogged} />
+                    <Box
+                        mt={10}
+                        ms={2}
+                        px={{ sm: 10, xs: 5 }}
+                        display="flex"
+                        flexDirection="column"
+                    >
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton size="large" color="inherit">
+                                <ArrowBack />
+                            </IconButton>
+                        </Box>
 
-                {!created && (
-                    <>
-                        <Typography my={2}>Adição de conteúdo:</Typography>
-                        <Grid
-                            container
-                            width="100%"
-                            maxWidth="xl"
-                            display="flex"
-                            alignItems="start"
-                            columnSpacing={{ md: 5 }}
-                        >
-                            <Grid item xs={12} md={1}>
-                                <Typography>Tipo</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={5} mb={2}>
-                                <FormControl color="primary" focused fullWidth size='small'>
-                                    <Select
-                                        className="select"
-                                        value={contentTypeId}
-                                        onChange={handleContentTypeChange}
-                                    >
-                                        {contentType.map((content) => (
-                                            <MenuItem key={content.id} value={content.id}>
-                                                {content.name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>   
-                            </Grid>             
-                            <Grid item xs={12} md={1}>
-                                <Typography>Nome</Typography>                            
-                            </Grid>            
-                            <Grid item xs={12} md={5} mb={2} >
-                                <FormControl color="primary" focused fullWidth>
-                                    <TextField
-                                        size='small'
-                                        focused
-                                        fullWidth
-                                        type="text"
-                                        id="nameContent"
-                                        value={contentName}
-                                        onChange={(e) => setContentName(e.target.value)}
-                                    ></TextField>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} md={1}>
-                                <Typography>Parceiro</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={5} mb={2}>
-                                <FormControl color="primary" focused fullWidth size='small'>
-                                    <Select
-                                        className="select"
-                                        value={authorId}
-                                        onChange={handleAuthorChange}
-                                    >
-                                        {authors.map((author) => (
-                                            <MenuItem key={author.id} value={author.id}>
-                                                {author.name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            </Grid>
+                        {!created && (
+                            <>
+                                <Typography my={2}>Adição de conteúdo:</Typography>
+                                <Grid
+                                    container
+                                    width="100%"
+                                    maxWidth="xl"
+                                    display="flex"
+                                    alignItems="start"
+                                    columnSpacing={{ md: 5 }}
+                                >
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Tipo</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" focused fullWidth size="small">
+                                            <Select
+                                                className="select"
+                                                value={contentTypeId}
+                                                onChange={handleContentTypeChange}
+                                            >
+                                                {contentType.map((content) => (
+                                                    <MenuItem key={content.id} value={content.id}>
+                                                        {content.name}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Nome</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" focused fullWidth>
+                                            <TextField
+                                                size="small"
+                                                focused
+                                                fullWidth
+                                                type="text"
+                                                id="nameContent"
+                                                value={contentName}
+                                                onChange={(e) => setContentName(e.target.value)}
+                                            ></TextField>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Parceiro</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" focused fullWidth size="small">
+                                            <Select
+                                                className="select"
+                                                value={authorId}
+                                                onChange={handleAuthorChange}
+                                            >
+                                                {authors.map((author) => (
+                                                    <MenuItem key={author.id} value={author.id}>
+                                                        {author.name}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
 
-                            <Grid item xs={12} md={1}>
-                                <Typography>Duração</Typography>
-                            </Grid>                
-                            <Grid item xs={12} md={5} mb={2}>
-                                <FormControl color="primary" focused fullWidth >
-                                    <TextField
-                                        size='small'
-                                        focused
-                                        fullWidth
-                                        type="text"
-                                        id="timeContent"
-                                        value={duration}
-                                        onChange={(e) => setDuration(e.target.value)}
-                                    ></TextField>
-                                </FormControl>
-                            </Grid>
-                            
-                            <Grid item xs={12} md={1}>
-                                <Typography>Tags</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={5} mb={2}>
-                                <FormControl color="primary" focused fullWidth >
-                                    <TextField
-                                        size='small'
-                                        focused
-                                        fullWidth
-                                        type="text"
-                                        id="tagsContent"
-                                        value={tags}
-                                        onChange={(e) => setTags(e.target.value)}
-                                    ></TextField>
-                                </FormControl>
-                            </Grid>
-                            
-                            <Grid item xs={12} md={1}>
-                                <Typography>Imagem</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={5} mb={2}>
-                                <FormControl color="primary" focused fullWidth>
-                                    <TextField
-                                        size='small'
-                                        focused
-                                        fullWidth
-                                        type="text"
-                                        id="imgContent"
-                                        value={image}
-                                        onChange={(e) => setImage(e.target.value)}
-                                    ></TextField>
-                                </FormControl>
-                            </Grid>
-                            
-                            <Grid item xs={12} md={1}>
-                                <Typography>Link</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={5} mb={2}>
-                                <FormControl color="primary" fullWidth >
-                                    <TextField
-                                        size='small'
-                                        focused
-                                        fullWidth
-                                        type="url"
-                                        id="linkContent"
-                                        value={contentLink}
-                                        onChange={(e) => setContentLink(e.target.value)}
-                                    ></TextField>
-                                </FormControl>
-                            </Grid>
-                            
-                            <Grid item xs={12} md={1}>
-                                <Typography>Descrição</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={5} mb={5}>
-                                <FormControl focused fullWidth >
-                                    <TextareaAutosize
-                                        focused
-                                        minRows={5}
-                                        style={{ background: "none", border: "1px solid #ffffff" }}
-                                        id="descContent"
-                                        value={description}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                    />
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Duração</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" focused fullWidth>
+                                            <TextField
+                                                size="small"
+                                                focused
+                                                fullWidth
+                                                type="text"
+                                                id="timeContent"
+                                                value={duration}
+                                                onChange={(e) => setDuration(e.target.value)}
+                                            ></TextField>
+                                        </FormControl>
+                                    </Grid>
 
-                                </FormControl>                                    
-                            </Grid>
-                            <Grid item md={7}></Grid>
-                            <Grid item xs={12} md={5}>
-                                <Button variant="contained" color='inherit' fullWidth onClick={handleSubmit}><Typography color="#000000" textTransform="none">Adicionar</Typography></Button>
-                            </Grid>
-                        </Grid>
-                    </>
-                )}
-            </Box>
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Tags</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" focused fullWidth>
+                                            <TextField
+                                                size="small"
+                                                focused
+                                                fullWidth
+                                                type="text"
+                                                id="tagsContent"
+                                                value={tags}
+                                                onChange={(e) => setTags(e.target.value)}
+                                            ></TextField>
+                                        </FormControl>
+                                    </Grid>
 
-            {created && (
-                <ContentCard
-                    title={contentName}
-                    type={contentTypeId}
-                    description={description}
-                    author={authorId}
-                    duration={duration}
-                    image={image}
-                />
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Imagem</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" focused fullWidth>
+                                            <TextField
+                                                size="small"
+                                                focused
+                                                fullWidth
+                                                type="text"
+                                                id="imgContent"
+                                                value={image}
+                                                onChange={(e) => setImage(e.target.value)}
+                                            ></TextField>
+                                        </FormControl>
+                                    </Grid>
+
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Link</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={2}>
+                                        <FormControl color="primary" fullWidth>
+                                            <TextField
+                                                size="small"
+                                                focused
+                                                fullWidth
+                                                type="url"
+                                                id="linkContent"
+                                                value={contentLink}
+                                                onChange={(e) => setContentLink(e.target.value)}
+                                            ></TextField>
+                                        </FormControl>
+                                    </Grid>
+
+                                    <Grid item xs={12} md={1}>
+                                        <Typography>Descrição</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={5}>
+                                        <FormControl focused fullWidth>
+                                            <TextareaAutosize
+                                                focused
+                                                minRows={5}
+                                                style={{
+                                                    background: 'none',
+                                                    border: '1px solid #ffffff',
+                                                }}
+                                                id="descContent"
+                                                value={description}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item md={7}></Grid>
+                                    <Grid item xs={12} md={5}>
+                                        <Button
+                                            variant="contained"
+                                            color="inherit"
+                                            fullWidth
+                                            onClick={handleSubmit}
+                                        >
+                                            <Typography color="#000000" textTransform="none">
+                                                Adicionar
+                                            </Typography>
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </>
+                        )}
+                    </Box>
+
+                    {created && (
+                        <ContentCard
+                            title={contentName}
+                            type={contentTypeId}
+                            description={description}
+                            author={authorId}
+                            duration={duration}
+                            image={image}
+                        />
+                    )}
+                </>
             )}
+
+            {logged === 'false' && <Navigate to="/login" replace={true} />}
         </div>
     );
 }
