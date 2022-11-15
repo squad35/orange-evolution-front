@@ -25,7 +25,7 @@ function ContentCard(props) {
                     {props.description}
                 </Typography>
                 <p>
-                    Oferido por: <span>{props.author}</span>
+                    Oferecido por: <span>{props.author}</span>
                 </p>
                 <p>
                     Duração: <span>{props.duration}</span>
