@@ -12,10 +12,19 @@ import {
     Button,
     Select,
     MenuItem,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Paper,
+    FilledInput,
+    OutlinedInput,
 } from '@mui/material';
 import fetchService from '../services/fetchService';
 import ContentCard from '../components/ContentCard';
 import { Navigate } from 'react-router-dom';
+import { borderRadius } from '@mui/system';
 
 function AddContent() {
     const [contentType, setContentType] = useState([]);
@@ -97,6 +106,16 @@ function AddContent() {
         FetchContentType('https://orange-evolution-squad35.herokuapp.com/content-types');
         FetchAuthors('https://orange-evolution-squad35.herokuapp.com/authors');
     }, []);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     return (
         <div>
@@ -256,10 +275,7 @@ function AddContent() {
                                             <TextareaAutosize
                                                 focused
                                                 minRows={5}
-                                                style={{
-                                                    background: 'none',
-                                                    border: '1px solid #ffffff',
-                                                }}
+                                                style={{color:"inherit", fontFamily:"Montserrat" , fontSize:"1rem", fontWeight:200, background: "none", border: "1px solid #ffffff", padding:'10px'}}
                                                 id="descContent"
                                                 value={description}
                                                 onChange={(e) => setDescription(e.target.value)}
@@ -267,8 +283,9 @@ function AddContent() {
                                         </FormControl>
                                     </Grid>
                                     <Grid item md={7}></Grid>
-                                    <Grid item xs={12} md={5}>
+                                    <Grid item xs={12} md={5} mb={5}>
                                         <Button
+            
                                             variant="contained"
                                             color="inherit"
                                             fullWidth
@@ -278,6 +295,40 @@ function AddContent() {
                                                 Adicionar
                                             </Typography>
                                         </Button>
+                                    </Grid>
+                                    <Grid item xs={12} md={5} mb={5}>
+                                        <Button
+
+                                            variant="contained"
+                                            color="inherit"
+                                            fullWidth
+                                            onClick={handleClickOpen}
+                                        >
+                                            <Typography color="#000000" textTransform="none">
+                                                Teste Modal
+                                            </Typography>
+                                        </Button>                                      
+
+                                        <Dialog open={open} onClose={handleClose}>                                        
+                                            <DialogContent   style={{backgroundColor: "#ffffff"}}>
+                                                <DialogContentText my={2} style={{backgroundColor: "#ffffff", color:"#000000" }}>
+                                                    Por favor, confirme sua senha
+                                                </DialogContentText>
+                                                <OutlinedInput                                            
+                                                    type="password"
+                                                    focused
+                                                    required                                                                                                      
+                                                    size="small"
+                                                    p={0}
+                                                    style={{backgroundColor:"#E2E2E2B2",  borderRadius: "10px", color: "#000000"}}
+                                                    
+                                                />
+                                            </DialogContent>
+                                            <DialogActions style={{backgroundColor: "#ffffff"}}>                                                
+                                                <Button onClick={handleClose} fullWidth color="secondary">ok</Button>                                     
+                                            </DialogActions>
+                                        </Dialog>
+                                        
                                     </Grid>
                                 </Grid>
                             </>
