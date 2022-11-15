@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import Header from '../components/Header';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 function Dashboard() {
     const [logged, setLogged] = useState(localStorage.getItem('logged'));
@@ -24,17 +24,19 @@ function Dashboard() {
                         <Box maxWidth={400}>
                             <Typography py={2}>Atividades</Typography>
                             <Box>
-                                <Button
-                                    variant="contained"
-                                    color="inherit"
-                                    fullWidth
-                                    size="large"
-                                    p={3}
-                                >
-                                    <Typography color="#000000" textTransform="none">
-                                        Adicionar Conteúdo
-                                    </Typography>
-                                </Button>
+                                <Link to="/addContent">
+                                    <Button
+                                        variant="contained"
+                                        color="inherit"
+                                        fullWidth
+                                        size="large"
+                                        p={3}
+                                    >
+                                        <Typography color="#000000" textTransform="none">
+                                            Adicionar Conteúdo
+                                        </Typography>
+                                    </Button>
+                                </Link>
                             </Box>
                             <Box py={4}>
                                 <Button variant="contained" color="inherit" fullWidth size="large">

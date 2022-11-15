@@ -25,14 +25,18 @@ import fetchService from '../services/fetchService';
 import ContentCard from '../components/ContentCard';
 import { Navigate } from 'react-router-dom';
 import { borderRadius } from '@mui/system';
+import MaskTextField from '../components/MaskTextField';
 
 function AddContent() {
     const [contentType, setContentType] = useState([]);
     const [contentTypeId, setContetTypeId] = useState('');
+    const [contentTypeName, setContetTypeName] = useState('');
     const [contentName, setContentName] = useState('');
     const [authors, setAuthors] = useState([]);
     const [authorId, setAuthorId] = useState('');
+    const [authorName, setAuthorName] = useState('');
     const [duration, setDuration] = useState('');
+    const [durationInSeconds, setDurationInSeconds] = useState('');
     const [tags, setTags] = useState('');
     const [image, setImage] = useState('');
     const [contentLink, setContentLink] = useState('');
@@ -84,6 +88,35 @@ function AddContent() {
         setAuthorId(e.target.value);
     };
 
+    const getAuthorName = () => {
+        authors.map((author) => {
+            if (authorId === author.id) {
+                setAuthorName(author.name);
+            }
+        });
+    };
+
+    const getContentTypeName = () => {
+        contentType.map((contentType) => {
+            if (contentTypeId === contentType.id) {
+                setContetTypeName(contentType.name);
+            }
+        });
+    };
+
+    const convertDurationInSeconds = () => {
+        const hours = duration.split(':')[0];
+        const minutes = duration.split(':')[1];
+        const seconds = duration.split(':')[2];
+        let totalInSeconds = 0;
+
+        if (hours) totalInSeconds += parseInt(hours) * 3600;
+        if (minutes) totalInSeconds += parseInt(minutes) * 60;
+        if (seconds) totalInSeconds += parseInt(seconds);
+
+        return totalInSeconds;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -91,15 +124,18 @@ function AddContent() {
             name: contentName,
             content_type_id: contentTypeId,
             author_id: authorId,
-            duration: duration,
+            duration: convertDurationInSeconds(),
             link: contentLink,
             description: description,
             image: image,
             tags: tags,
         };
 
-        console.log('conteudo: ', content);
+        console.log(content);
+
         FetchCreate('https://orange-evolution-squad35.herokuapp.com/contents', 'POST', content);
+        getAuthorName();
+        getContentTypeName();
     };
 
     useEffect(() => {
@@ -177,6 +213,7 @@ function AddContent() {
                                                 id="nameContent"
                                                 value={contentName}
                                                 onChange={(e) => setContentName(e.target.value)}
+                                                required
                                             ></TextField>
                                         </FormControl>
                                     </Grid>
@@ -204,7 +241,7 @@ function AddContent() {
                                     </Grid>
                                     <Grid item xs={12} md={5} mb={2}>
                                         <FormControl color="primary" focused fullWidth>
-                                            <TextField
+                                            {/* <TextField
                                                 size="small"
                                                 focused
                                                 fullWidth
@@ -212,7 +249,11 @@ function AddContent() {
                                                 id="timeContent"
                                                 value={duration}
                                                 onChange={(e) => setDuration(e.target.value)}
-                                            ></TextField>
+                                            ></TextField> */}
+                                            <MaskTextField
+                                                duration={duration}
+                                                function={setDuration}
+                                            />
                                         </FormControl>
                                     </Grid>
 
@@ -338,9 +379,9 @@ function AddContent() {
                     {created && (
                         <ContentCard
                             title={contentName}
-                            type={contentTypeId}
+                            type={contentTypeName}
                             description={description}
-                            author={authorId}
+                            author={authorName}
                             duration={duration}
                             image={image}
                         />

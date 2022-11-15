@@ -16,6 +16,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../img/logo.svg';
 import logout from '../services/LogoutService';
+import { Link } from 'react-router-dom';
+import CustomMenuItem from './CustomMenuItem';
 
 const pages = ['Home', 'Trilhas', 'Parceiros', 'Newsletter', 'Login'];
 
@@ -83,7 +85,7 @@ function Header(props) {
                                 width: '100vw',
                             }}
                         >
-                            {pages.map((page) => (
+                            {/* {pages.map((page) => (
                                 <MenuItem
                                     key={page}
                                     onClick={handleCloseNavMenu}
@@ -95,7 +97,32 @@ function Header(props) {
                                         {page}
                                     </Typography>
                                 </MenuItem>
-                            ))}
+                            ))} */}
+                            <CustomMenuItem
+                                propsFunction={handleCloseNavMenu}
+                                name="Home"
+                                link="/"
+                            />
+                            <CustomMenuItem
+                                propsFunction={handleCloseNavMenu}
+                                name="Trilhas"
+                                link="/"
+                            />
+                            <CustomMenuItem
+                                propsFunction={handleCloseNavMenu}
+                                name="Parceiros"
+                                link="/"
+                            />
+                            <CustomMenuItem
+                                propsFunction={handleCloseNavMenu}
+                                name="Newsletter"
+                                link="/"
+                            />
+                            <CustomMenuItem
+                                propsFunction={handleCloseNavMenu}
+                                name="Login"
+                                link="/login"
+                            />
                         </Menu>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -121,7 +148,7 @@ function Header(props) {
                             justifyContent: 'end',
                         }}
                     >
-                        {pages.map((page) => (
+                        {/* {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
@@ -129,7 +156,47 @@ function Header(props) {
                             >
                                 {page}
                             </Button>
-                        ))}
+                        ))} */}
+                        <Link to="/">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Home
+                            </Button>
+                        </Link>
+                        <Link to="/">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Trilhas
+                            </Button>
+                        </Link>
+                        <Link to="/">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Parceiros
+                            </Button>
+                        </Link>
+                        <Link to="/">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Newsletter
+                            </Button>
+                        </Link>
+                        <Link to="/login">
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Login
+                            </Button>
+                        </Link>
                     </Box>
 
                     {logged === 'true' && (
@@ -160,14 +227,16 @@ function Header(props) {
                                     onClose={handleCloseUserMenu}
                                 >
                                     <MenuItem onClick={handleLogout}>
-                                        <Typography
-                                            display="flex"
-                                            flex-end
-                                            variant="h6"
-                                            fontWeight={700}
-                                        >
-                                            Sair
-                                        </Typography>
+                                        <Link to="/login">
+                                            <Typography
+                                                display="flex"
+                                                flex-end
+                                                variant="h6"
+                                                fontWeight={700}
+                                            >
+                                                Sair
+                                            </Typography>
+                                        </Link>
                                     </MenuItem>
                                 </Menu>
                             </Box>
