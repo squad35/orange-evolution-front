@@ -24,32 +24,36 @@ function Home() {
     return (
         <div className="Home">
             <Header setLogged={setLogged} />
+            <Box               
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"                
+                width="100vw"
+                height="50vh"
+                sx={{
+                    backgroundImage: `url(${Background})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'none',                    
+                }}
+                >
+                <Box>
+                    <Typography variant="h3" fontWeight={700} mt={4} px={5}>
+                        Orange
+                    </Typography>
+                    <Typography variant="h3" fontWeight={700} mt={0} px={5}>
+                        Evolution
+                    </Typography>
+                    <Typography fontWeight={700} pt={1}></Typography>
+                </Box>
+            </Box>
             <Box
-                mt={10}
-                ms={2}
+                mt={5}                
                 px={{ sm: 10, xs: 5 }}
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
             >
-                <Box
-                    width="100vw"
-                    height="50vh"
-                    sx={{
-                        backgroundImage: `url(${Background})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'none',
-                        width: '100%',
-                    }}
-                >
-                    <Typography variant="h3" fontWeight={700} mt={4} ml={4}>
-                        Orange
-                    </Typography>
-                    <Typography variant="h3" fontWeight={700} mt={0} ml={4}>
-                        Evolution
-                    </Typography>
-                    <Typography fontWeight={700} pt={1}></Typography>
-                </Box>
+                
                 <Typography variant="h5" fontWeight={700} mb={5}>
                     Trilhas
                 </Typography>
