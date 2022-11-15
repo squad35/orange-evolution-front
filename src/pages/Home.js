@@ -33,22 +33,22 @@ function Home() {
                 justifyContent="center"
             >
                 <Box
-                    maxWidth={230}
+                    width="100vw"
                     height="50vh"
                     sx={{
                         backgroundImage: `url(${Background})`,
-                        backgroundSize: '',
-                        width: '100vw',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'none',
+                        width: '100%',
                     }}
                 >
-                    <Typography variant="h3" fontWeight={700} mt={4}>
-                        Orange Evolution
+                    <Typography variant="h3" fontWeight={700} mt={4} ml={4}>
+                        Orange
                     </Typography>
-                    <Divider sx={{ background: '#ffffff', pt: 0.5 }} />
-                    <Typography fontWeight={700} pt={1}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed magna
-                        elementum, aliquet neque quis, accumsan ex. Suspendisse vel eleifend tortor.
+                    <Typography variant="h3" fontWeight={700} mt={0} ml={4}>
+                        Evolution
                     </Typography>
+                    <Typography fontWeight={700} pt={1}></Typography>
                 </Box>
                 <Typography variant="h5" fontWeight={700} mb={5}>
                     Trilhas

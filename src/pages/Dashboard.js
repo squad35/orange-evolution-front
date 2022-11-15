@@ -39,11 +39,18 @@ function Dashboard() {
                                 </Link>
                             </Box>
                             <Box py={4}>
-                                <Button variant="contained" color="inherit" fullWidth size="large">
-                                    <Typography color="#000000" textTransform="none">
-                                        Arquivar Conteúdo
-                                    </Typography>
-                                </Button>
+                                <Link to="/search">
+                                    <Button
+                                        variant="contained"
+                                        color="inherit"
+                                        fullWidth
+                                        size="large"
+                                    >
+                                        <Typography color="#000000" textTransform="none">
+                                            Arquivar Conteúdo
+                                        </Typography>
+                                    </Button>
+                                </Link>
                             </Box>
                         </Box>
                     </Box>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import { ArrowBack, ConfirmationNumberRounded } from '@mui/icons-material';
+import { ArrowBack } from '@mui/icons-material';
 import {
     Box,
     Grid,
@@ -13,21 +13,18 @@ import {
     Select,
     MenuItem,
     Dialog,
-    DialogTitle,
     DialogContent,
     DialogContentText,
     DialogActions,
-    Paper,
-    FilledInput,
     OutlinedInput,
 } from '@mui/material';
 import fetchService from '../services/fetchService';
 import ContentCard from '../components/ContentCard/ContentCard';
-import { Navigate } from 'react-router-dom';
-import { borderRadius } from '@mui/system';
+import { Navigate, useParams } from 'react-router-dom';
 import MaskTextField from '../components/MaskTextField';
+import ConvertTime from '../services/ConvertTime';
 
-function AddContent() {
+const EditContent = () => {
     const [contentType, setContentType] = useState([]);
     const [contentTypeId, setContetTypeId] = useState('');
     const [contentTypeName, setContetTypeName] = useState('');
@@ -47,6 +44,7 @@ function AddContent() {
     const [userName, setUserName] = useState(
         localStorage.getItem('first_name').replace('"', '').replace('"', '')
     );
+    const [ParamsId] = useState(useParams().id);
 
     const FetchContentType = async (url) => {
         const response = await fetchService(url, 'GET');
@@ -60,6 +58,21 @@ function AddContent() {
         setAuthors(data);
     };
 
+    const FetchContentData = async (url) => {
+        const response = await fetchService(url, 'GET');
+        const data = await response.json();
+
+        setContetTypeId(data[0].content_type_id);
+        setContentName(data[0].name);
+        setAuthorId(data[0].author_id);
+        setImage(data[0].image);
+        setContentLink(data[0].link);
+        setDescription(data[0].description);
+
+        setDuration(ConvertTime(data[0].duration));
+        setDurationInSeconds(data[0].duration);
+    };
+
     const FetchCreate = async (url, method, content) => {
         const response = await fetch(url, {
             method: method,
@@ -69,8 +82,8 @@ function AddContent() {
 
         const data = await response.json();
 
-        if (response.status === 201) {
-            alert('cadastrado com sucesso!');
+        if (response.status === 200) {
+            alert('Conteúdo editado com sucesso!');
             setCreated(true);
         } else {
             alert(data.message);
@@ -111,7 +124,6 @@ function AddContent() {
         if (minutes) totalInSeconds += parseInt(minutes) * 60;
         if (seconds) totalInSeconds += parseInt(seconds);
 
-        setDurationInSeconds(totalInSeconds);
         return totalInSeconds;
     };
 
@@ -123,6 +135,8 @@ function AddContent() {
     useEffect(() => {
         FetchContentType('https://orange-evolution-squad35.herokuapp.com/content-types');
         FetchAuthors('https://orange-evolution-squad35.herokuapp.com/authors');
+
+        FetchContentData(`https://orange-evolution-squad35.herokuapp.com/contents/${ParamsId}`);
     }, []);
 
     const [open, setOpen] = React.useState(false);
@@ -145,7 +159,11 @@ function AddContent() {
                 tags: tags,
             };
 
-            FetchCreate('https://orange-evolution-squad35.herokuapp.com/contents', 'POST', content);
+            FetchCreate(
+                `https://orange-evolution-squad35.herokuapp.com/contents/${ParamsId}`,
+                'PUT',
+                content
+            );
 
             getAuthorName();
             getContentTypeName();
@@ -184,7 +202,7 @@ function AddContent() {
 
                         {!created && (
                             <>
-                                <Typography my={2}>Adição de conteúdo:</Typography>
+                                <Typography my={2}>Edição de conteúdo:</Typography>
                                 <Grid
                                     container
                                     width="100%"
@@ -408,6 +426,6 @@ function AddContent() {
             {logged === 'false' && <Navigate to="/login" replace={true} />}
         </div>
     );
-}
+};
 
-export default AddContent;
+export default EditContent;
