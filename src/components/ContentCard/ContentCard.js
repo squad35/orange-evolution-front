@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ContentCard.module.css';
 import ConvertTime from '../../services/ConvertTime';
+import { Box } from '@mui/system';
 
 function ContentCard(props) {
     const [description, setDescription] = useState('');
@@ -35,9 +36,9 @@ function ContentCard(props) {
     return (
         <Card
             className={styles.container}
-            sx={{ maxWidth: 345, minHeight: '560px', backgroundColor: 'white' }}
+            sx={{ maxWidth: 345, minHeight:450 , backgroundColor: 'white' }}
         >
-            <CardHeader title={title} subheader={props.type} sx={{ color: 'black' }} />
+            <CardHeader title={title} subheader={props.type} subheaderTypographyProps={{color: 'black'}} titleTypographyProps={{fontSize:"20px", fontWeight:500}} sx={{ color: 'black'}} />
             <a href={props.link} target="blank">
                 <CardMedia
                     component="img"
@@ -50,20 +51,23 @@ function ContentCard(props) {
                 <Typography variant="body2" sx={{ color: 'black' }}>
                     {description}
                 </Typography>
-                <p>
-                    Oferecido por: <span>{props.author}</span>
-                </p>
-                <p>
-                    Duração: <span>{durationFormated}</span>
-                </p>
+                <Box display="flex" justifyContent="space-between">
+                    <Typography variant="body2" mt={2} lineHeight={1.5}>
+                        Oferecido por: <span>{props.author}</span>
+                    <br/>
+                        Duração: <span>{durationFormated}</span>
+                    </Typography>
+                    <CardActions sx={{position:"relative", right: "-20px", bottom:"-15px"}}>
+                        <IconButton>
+                            <Link to={link}>
+                                <DriveFileRenameOutlineIcon />
+                            </Link>
+                        </IconButton>
+                    </CardActions>
+
+                </Box>
+                
             </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <Link to={link}>
-                        <DriveFileRenameOutlineIcon />
-                    </Link>
-                </IconButton>
-            </CardActions>
         </Card>
     );
 }

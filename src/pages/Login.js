@@ -101,6 +101,7 @@ function Login() {
                         fullwidht
                         focused
                         required
+                        background="transparent"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         InputProps={{
